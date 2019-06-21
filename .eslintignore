@@ -12,6 +12,7 @@
 
 # misc
 /coverage/
+/utils/
 !.*
 
 # ember-try
