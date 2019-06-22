@@ -23,8 +23,8 @@ module.exports = {
 
 		const defaults = {
 			rootURL: url,
-			entrypointFileName: 'lit-elements-imports.js',
-			outputFileName: 'lit-elements-bundle.js',
+			entrypointFileName: 'module-imports.js',
+			outputFileName: 'bundle.js',
 			outputPath: 'assets',
 			minify: isProductionEnv,
 			modules: false,
@@ -120,8 +120,7 @@ module.exports = {
 		});
 
 		return mergeTrees(rollupFunnels.concat(tree), {
-			overwrite: true,
-			annotation: 'Bundle LitElements'
+			overwrite: true
 		});
 	}
 };

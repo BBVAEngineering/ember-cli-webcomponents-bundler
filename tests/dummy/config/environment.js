@@ -25,10 +25,10 @@ module.exports = function(environment) {
 			// Here you can pass flags/options to your application instance
 			// when it is created
 		},
-		'ember-cli-litelement-bundler': {
+		'ember-cli-webcomponents-bundler': {
 			modules: true,
 			entrypointPaths: [
-				path.join(entrypoint, 'dummy-path')
+				path.join(entrypoint, 'web-components')
 			]
 		}
 	};
