@@ -10,12 +10,12 @@ const multiEntry = require('rollup-plugin-multi-entry');
 const terser = require('rollup-plugin-terser').terser;
 
 module.exports = function({
-	entrypoint = '',
-	outputfile = '',
-	root = '',
-	minify = false,
-	config = {}
-} = {}) {
+	entrypoint,
+	outputfile,
+	root,
+	minify,
+	config
+}) {
 	const legacy = config.name === 'legacy';
 
 	const inputFiles = [
