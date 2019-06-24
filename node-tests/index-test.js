@@ -27,8 +27,8 @@ function runEmberCommand(packagePath, command) {
 	);
 }
 
-function outputFilePath(file, dir = 'dist') {
-	return path.join(fixturePath, dir, file);
+function outputFilePath(file) {
+	return path.join(path.resolve(__dirname, '../dist'), file);
 }
 
 function assertContains(filePath, regexp) {
@@ -58,7 +58,7 @@ function restoreConfig(mockFile) {
 describe('ember-cli-webcomponents-bundler', function() {
 	this.timeout(TEST_TIMEOUT);
 
-	context('default options', () => {
+	context('using default options', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.default;
 
 		before(() => {
@@ -73,7 +73,10 @@ describe('ember-cli-webcomponents-bundler', function() {
 
 		it('generates one bundle for each entrypointPath', () => {
 			assertFileExists(path.resolve(__dirname, '../dist/assets/web-components/bundle.js'));
-			assertFileExists(path.resolve(__dirname, '../dist/assets/second-path/bundle.js'));
+		});
+
+		it('inserts the script tag for the bundle in index', () => {
+			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
 		});
 	});
 });

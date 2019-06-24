@@ -16,8 +16,7 @@ module.exports = function(environment) {
 		},
 		'ember-cli-webcomponents-bundler': {
 			entrypointPaths: [
-				path.join(entrypoint, 'web-components'),
-				path.join(entrypoint, 'second-path')
+				path.join(entrypoint, 'web-components')
 			]
 		}
 	};
