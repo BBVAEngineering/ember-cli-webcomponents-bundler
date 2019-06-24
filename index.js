@@ -22,7 +22,6 @@ module.exports = {
 		const url = baseConfig.rootURL || baseConfig.baseURL || '';
 
 		const defaults = {
-			rootURL: url,
 			entrypointFileName: 'module-imports.js',
 			outputFileName: 'bundle.js',
 			outputPath: 'assets',
@@ -33,6 +32,7 @@ module.exports = {
 		};
 
 		this.options = Object.assign(defaults, options);
+		this.options.rootURL = url;
 
 		this._setOutputOptions();
 	},
