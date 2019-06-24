@@ -30,6 +30,9 @@ module.exports = function(targets) {
 						targets
 					}
 				]
+			],
+			plugins: [
+				'@babel/plugin-syntax-import-meta'
 			]
 		}
 	};
