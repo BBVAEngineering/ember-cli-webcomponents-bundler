@@ -93,6 +93,22 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js" defer nomodule');
 		});
 	});
+
+	context('without autoImport (autoImport: false)', () => {
+		const mockConfigFile = MOCK_ENV_CONFIGS.noAutoImport;
+
+		before(() => {
+			mockConfig(mockConfigFile);
+			return runEmberCommand(fixturePath, 'build --prod');
+		});
+
+		after(() => {
+			restoreConfig(mockConfigFile);
+			fs.removeSync(distPath);
+		});
+
+		it('does not insert a script tag for the bundle in index', () => {
+			assert.noFileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
 		});
 	});
 });
