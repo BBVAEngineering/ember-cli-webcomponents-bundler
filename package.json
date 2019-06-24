@@ -15,6 +15,15 @@
     "doc": "doc",
     "test": "tests"
   },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE.md",
+    "config/babel.js",
+    "config/output.js",
+    "config/rollup.js",
+    "utils/**"
+  ],
   "scripts": {
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
