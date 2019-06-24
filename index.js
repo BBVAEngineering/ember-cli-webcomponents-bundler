@@ -19,7 +19,7 @@ module.exports = {
 
 		env = env || process.env.EMBER_ENV;
 		const isProductionEnv = Boolean(env.match('prod'));
-		const url = baseConfig.rootURL || baseConfig.baseURL || '';
+		const url = baseConfig.rootURL || '';
 
 		const defaults = {
 			entrypointFileName: 'module-imports.js',
@@ -51,6 +51,7 @@ module.exports = {
 		}
 	},
 
+	/* istanbul ignore next */
 	afterInstall() {
 		return this.addPackageToProject('@webcomponents/webcomponentsjs', '2.2.10');
 	},
