@@ -8,7 +8,8 @@ const assert = require('assert');
 
 const TEST_TIMEOUT = 120000;
 const MOCK_ENV_CONFIGS = {
-	default: path.resolve(__dirname, './mocks/environment-default.js')
+	default: path.resolve(__dirname, './mocks/environment-default.js'),
+	modules: path.resolve(__dirname, './mocks/environment-modules.js')
 };
 
 const emberCLIPath = path.resolve(__dirname, '../node_modules/ember-cli/bin/ember');
@@ -55,10 +56,10 @@ function restoreConfig(mockFile) {
 	fs.renameSync(path.resolve(fixturePath, 'environment-BACKUP.js'), path.resolve(fixturePath, 'environment.js'));
 }
 
-describe('ember-cli-webcomponents-bundler', function() {
+describe('ember-cli-webcomponents-bundler | options', function() {
 	this.timeout(TEST_TIMEOUT);
 
-	context('using default options', () => {
+	context('using defaults', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.default;
 
 		before(() => {
@@ -77,6 +78,30 @@ describe('ember-cli-webcomponents-bundler', function() {
 
 		it('inserts the script tag for the bundle in index', () => {
 			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
+		});
+	});
+
+	context('using modules', () => {
+		const mockConfigFile = MOCK_ENV_CONFIGS.modules;
+
+		before(() => {
+			mockConfig(mockConfigFile);
+			return runEmberCommand(path.resolve(__dirname, '../'), 'build --prod');
+		});
+
+		after(() => {
+			restoreConfig(mockConfigFile);
+			cleanup();
+		});
+
+		it('generates two bundles for each entrypointPath: one as module and one with the build config for the app targets', () => {
+			assertFileExists(path.resolve(__dirname, '../dist/assets/web-components/bundle.js'));
+			assertFileExists(path.resolve(__dirname, '../dist/assets/web-components/bundle-esm.js'));
+		});
+
+		it('inserts two script tags for the bundles in index', () => {
+			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle-esm.js" type="module"');
+			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js" defer nomodule');
 		});
 	});
 });
