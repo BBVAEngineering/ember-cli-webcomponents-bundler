@@ -1,10 +1,12 @@
 {
   "name": "ember-cli-webcomponents-bundler",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Allows to use Web Components using ES modules in your Ember app",
   "keywords": [
     "ember-addon",
-    "web components"
+    "web components",
+    "ES6 modules",
+    "bundle"
   ],
   "repository": "https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler.git",
   "license": "MIT",
