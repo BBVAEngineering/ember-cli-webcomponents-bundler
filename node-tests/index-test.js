@@ -6,7 +6,7 @@ const path = require('path');
 const exec = require('child_process').exec;
 const assert = require('yeoman-assert');
 
-const TEST_TIMEOUT = 120000;
+const TEST_TIMEOUT = 50000;
 const MOCK_ENV_CONFIGS = {
 	default: path.resolve(__dirname, './mocks/environment-default.js'),
 	modules: path.resolve(__dirname, './mocks/environment-modules.js'),
@@ -63,10 +63,12 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 
 		it('generates one bundle for each entrypointPath', () => {
 			assert.file(outputFilePath('assets/web-components/bundle.js'));
+			assert.file(outputFilePath('assets/dummy-path/bundle.js'));
 		});
 
 		it('inserts the script tag for the bundle in index', () => {
 			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
+			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/dummy-path/bundle.js"');
 		});
 	});
 
