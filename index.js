@@ -67,14 +67,6 @@ module.exports = {
 		this.app.import(path.join(__dirname, 'utils/webcomponents-utils.js'));
 	},
 
-	_getOutputFilePath(dirname, relative, esmodule) {
-		const root = relative ? '' : this.options.rootURL;
-		const filename = path.parse(this.options.outputFileName).name;
-		const ext = esmodule ? '-esm.js' : '.js';
-
-		return `${root}${this.options.outputPath}/${dirname}/${filename}${ext}`;
-	},
-
 	contentFor(type) {
 		if (type === 'body-footer' && this.options.autoImport) {
 			const scriptForPath = this._getScriptTag(this.options.modules);
@@ -93,6 +85,14 @@ module.exports = {
 
 			return `<script src="${this._getOutputFilePath(src)}" async defer></script>`;
 		};
+	},
+
+	_getOutputFilePath(dirname, relative, esmodule) {
+		const root = relative ? '' : this.options.rootURL;
+		const filename = path.parse(this.options.outputFileName).name;
+		const ext = esmodule ? '-esm.js' : '.js';
+
+		return `${root}${this.options.outputPath}/${dirname}/${filename}${ext}`;
 	},
 
 	postprocessTree(type, tree) {
