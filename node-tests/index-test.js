@@ -4,16 +4,19 @@
 const fs = require('fs-extra');
 const path = require('path');
 const exec = require('child_process').exec;
-const assert = require('assert');
+const assert = require('yeoman-assert');
 
 const TEST_TIMEOUT = 120000;
 const MOCK_ENV_CONFIGS = {
 	default: path.resolve(__dirname, './mocks/environment-default.js'),
-	modules: path.resolve(__dirname, './mocks/environment-modules.js')
+	modules: path.resolve(__dirname, './mocks/environment-modules.js'),
+	noAutoImport: path.resolve(__dirname, './mocks/environment-no-autoimport.js')
 };
 
 const emberCLIPath = path.resolve(__dirname, '../node_modules/ember-cli/bin/ember');
-const fixturePath = path.resolve(__dirname, '../tests/dummy/config');
+const fixturePath = path.resolve(__dirname, '../');
+const fixtureConfigPath = path.resolve(__dirname, '../tests/dummy/config');
+const distPath = path.resolve(__dirname, '../dist');
 
 function runEmberCommand(packagePath, command) {
 	return new Promise((resolve, reject) =>
@@ -28,32 +31,18 @@ function runEmberCommand(packagePath, command) {
 	);
 }
 
-function outputFilePath(file) {
-	return path.join(path.resolve(__dirname, '../dist'), file);
-}
-
-function assertContains(filePath, regexp) {
-	const fileContent = fs.readFileSync(filePath, 'utf8');
-
-	assert.ok(fileContent.match(regexp), `${filePath} contains ${regexp}`);
-}
-
-function assertFileExists(filePath) {
-	assert.ok(fs.existsSync(filePath), `${filePath} exists`);
-}
-
-function cleanup() {
-	fs.removeSync(path.resolve(__dirname, '../dist'));
-}
-
 function mockConfig(mockFile) {
-	fs.renameSync(path.resolve(fixturePath, 'environment.js'), path.resolve(fixturePath, 'environment-BACKUP.js'));
-	fs.renameSync(mockFile, path.resolve(fixturePath, 'environment.js'));
+	fs.renameSync(path.resolve(fixtureConfigPath, 'environment.js'), path.resolve(fixtureConfigPath, 'environment-BACKUP.js'));
+	fs.renameSync(mockFile, path.resolve(fixtureConfigPath, 'environment.js'));
 }
 
 function restoreConfig(mockFile) {
-	fs.renameSync(path.resolve(fixturePath, 'environment.js'), mockFile);
-	fs.renameSync(path.resolve(fixturePath, 'environment-BACKUP.js'), path.resolve(fixturePath, 'environment.js'));
+	fs.renameSync(path.resolve(fixtureConfigPath, 'environment.js'), mockFile);
+	fs.renameSync(path.resolve(fixtureConfigPath, 'environment-BACKUP.js'), path.resolve(fixtureConfigPath, 'environment.js'));
+}
+
+function outputFilePath(file) {
+	return path.join(distPath, file);
 }
 
 describe('ember-cli-webcomponents-bundler | options', function() {
@@ -64,44 +53,46 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 
 		before(() => {
 			mockConfig(mockConfigFile);
-			return runEmberCommand(path.resolve(__dirname, '../'), 'build --prod');
+			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
 		after(() => {
 			restoreConfig(mockConfigFile);
-			cleanup();
+			fs.removeSync(distPath);
 		});
 
 		it('generates one bundle for each entrypointPath', () => {
-			assertFileExists(path.resolve(__dirname, '../dist/assets/web-components/bundle.js'));
+			assert.file(outputFilePath('assets/web-components/bundle.js'));
 		});
 
 		it('inserts the script tag for the bundle in index', () => {
-			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
+			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
 		});
 	});
 
-	context('using modules', () => {
+	context('using modules (modules: true)', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.modules;
 
 		before(() => {
 			mockConfig(mockConfigFile);
-			return runEmberCommand(path.resolve(__dirname, '../'), 'build --prod');
+			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
 		after(() => {
 			restoreConfig(mockConfigFile);
-			cleanup();
+			fs.removeSync(distPath);
 		});
 
 		it('generates two bundles for each entrypointPath: one as module and one with the build config for the app targets', () => {
-			assertFileExists(path.resolve(__dirname, '../dist/assets/web-components/bundle.js'));
-			assertFileExists(path.resolve(__dirname, '../dist/assets/web-components/bundle-esm.js'));
+			assert.file(outputFilePath('assets/web-components/bundle.js'));
+			assert.file(outputFilePath('assets/web-components/bundle-esm.js'));
 		});
 
 		it('inserts two script tags for the bundles in index', () => {
-			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle-esm.js" type="module"');
-			assertContains(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js" defer nomodule');
+			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle-esm.js" type="module"');
+			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js" defer nomodule');
+		});
+	});
 		});
 	});
 });
