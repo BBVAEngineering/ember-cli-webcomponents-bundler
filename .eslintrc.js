@@ -25,6 +25,7 @@ module.exports = {
 			'ember-cli-build.js',
 			'index.js',
 			'testem.js',
+			'jest.config.js',
 			'blueprints/*/index.js',
 			'config/**/*.js',
 			'tests/dummy/config/**/*.js'
@@ -47,5 +48,13 @@ module.exports = {
 		rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
 			'no-process-env': 0
 		})
+	}, {
+		files: [
+			'node-tests/**/*.js'
+		],
+		env: {
+			jest: true
+		},
+		plugins: ['jest']
 	}]
 };

@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "web components"
   ],
-  "repository": "",
+  "repository": "https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler.git",
   "license": "MIT",
-  "author": "",
+  "author": "BBVAEngineering",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -17,8 +18,10 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint --fix --max-warnings 0 ./*.js config tests",
     "start": "ember serve",
-    "test": "COVERAGE=true ember test",
-    "test:all": "ember try:each",
+    "test": "npm-run-all test:*",
+    "test:ember": "COVERAGE=true ember test",
+    "test:node": "jest --coverage",
+    "test:node:watch": "jest --coverage --watch",
     "check-coverage": "istanbul check-coverage coverage/coverage-final.json --statements 100 --functions 100 --branches 100 --lines 100",
     "commit": "git-cz",
     "posttest": "npm run report-coverage && npm run check-coverage && npm run validate-coverage",
@@ -75,12 +78,16 @@
     "eslint": "^5.16.0",
     "eslint-config-bbva": "^2.0.4",
     "eslint-plugin-ember": "^6.6.0",
+    "eslint-plugin-jest": "^22.7.1",
     "eslint-plugin-node": "^9.1.0",
+    "fs-extra": "^8.0.1",
     "husky": "^2.4.1",
     "istanbul": "^0.4.5",
+    "jest": "^24.8.0",
     "json": "^9.0.6",
     "lit-element": "^2.2.0",
     "loader.js": "^4.7.0",
+    "npm-run-all": "^4.1.5",
     "qunit-dom": "^0.9.0",
     "semantic-release": "^15.13.16",
     "wired-button": "^1.0.0"
