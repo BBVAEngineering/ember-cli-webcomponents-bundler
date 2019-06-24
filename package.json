@@ -20,7 +20,7 @@
     "start": "ember serve",
     "test": "npm-run-all test:*",
     "test:ember": "COVERAGE=true ember test",
-    "test:node": "nyc --reporter=lcov --reporter=text mocha --recursive 'node-tests/**/*-test.js'",
+    "test:node": "nyc mocha --recursive 'node-tests/**/*-test.js'",
     "clean-coverage": "rm -rf coverage",
     "merge-coverage": "cp coverage/ember/coverage-final.json coverage/ember.json && cp coverage/node/coverage-final.json coverage/node.json && nyc merge coverage coverage/coverage-final.json",
     "check-coverage": "istanbul check-coverage coverage/coverage-final.json --statements 100 --functions 100 --branches 100 --lines 100",

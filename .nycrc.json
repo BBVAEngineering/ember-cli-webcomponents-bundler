@@ -1,0 +1,16 @@
+{
+  "check-coverage": true,
+  "include": [
+    "index.js",
+    "config/babel.js",
+    "config/output.js",
+    "config/rollup.js"
+  ],
+  "reporter": [
+    "lcov",
+    "json",
+    "json-summary",
+    "text"
+  ],
+  "report-dir": "coverage/node"
+}
