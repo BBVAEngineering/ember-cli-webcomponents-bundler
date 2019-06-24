@@ -28,7 +28,8 @@ module.exports = {
 			'jest.config.js',
 			'blueprints/*/index.js',
 			'config/**/*.js',
-			'tests/dummy/config/**/*.js'
+			'tests/dummy/config/**/*.js',
+			'node-tests/**/*.js'
 		],
 		excludedFiles: [
 			'addon/**',
@@ -42,19 +43,12 @@ module.exports = {
 		},
 		env: {
 			browser: false,
-			node: true
+			node: true,
+			mocha: true
 		},
 		plugins: ['node'],
 		rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
 			'no-process-env': 0
 		})
-	}, {
-		files: [
-			'node-tests/**/*.js'
-		],
-		env: {
-			jest: true
-		},
-		plugins: ['jest']
 	}]
 };
