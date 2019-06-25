@@ -48,9 +48,9 @@ import 'components/another-component/another-component';
 
 **Output**
 
-A bundled file will be generated for each of the `entrypointPaths` in the a directory with the name of the entrypointPath. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
+A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entrypointPath. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
 
-The name of the bundle and the `outputPath` can be configured setting `outputFileName` and `outputPath` respectively.
+Both, the bundle name and the output path can be configured by setting them as `outputFileName` and `outputPath` respectively.
 
 ## Options
 
@@ -59,49 +59,49 @@ The name of the bundle and the `outputPath` can be configured setting `outputFil
 type: `String`   
 default: `module-imports.js`
 
-Name of the file used as entry point for ES modules inside each entrypointPath.
+Name of the file used as entry point for ES modules inside each entry point path.
 
 ### `outputFileName`
 
 type: `String`   
 default: `bundle.js`
 
-Name of the generated bundle for each entypointPath.
+Name of the generated bundle for each entry point path.
 
 ### `outputPath`
 
 type: `String`   
 default: `assets`
 
-Path where the generated bundle will be saved in the dist folder.
+Path where the generated bundle will be saved inside the dist folder.
 
 ### `minify`
 
 type: `Boolean`   
 default: `false` (`true` in production env)
 
-Whether to minify the bundle. If not set, the bundle is minified in production environment.
+Minifies the bundle.
 
 ### `modules`
 
 type: `Boolean`   
 default: `false` 
 
-Whether to use ES6 modules. When this option is enabled, two bundles are generated: one for browsers with ES6 modules support and another for the rest of browsers using the build presets of the app.targets.
+Generates two bundles: one for browsers with ES6 modules support and another for the rest of browsers using the build presets of the app.targets.
 
 ### `entrypointPaths` 
 
 type: `Array`  
 default: `[]`
 
-List of paths where the addon will search for an entrypoint to generate its corresponding bundle.
+List of paths where the addon will search for an entry point to generate its corresponding bundle.
 
 ### `autoImport`
 
 type: `Boolean`   
 default: `true` 
 
-Set to `false` to not include the script tag with the bundle in the index.html. You can use this option if you want to import the scripts on demand.
+Writes the script tags for the bundle(s) in index.html. You can disable this option if you want to import the scripts on demand.
 
 ## Contribute
 
