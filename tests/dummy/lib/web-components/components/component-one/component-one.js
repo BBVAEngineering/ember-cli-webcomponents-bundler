@@ -5,7 +5,8 @@ class Component extends LitElement {
 	static get properties() {
 		return {
 			greeting: { type: String },
-			counter: { type: Number }
+			counter: { type: Number },
+			imgSrc: { type: String, attribute: 'img-src' }
 		};
 	}
 
@@ -19,17 +20,25 @@ class Component extends LitElement {
 		return css`
 			:host {
 				display: block;
-				font-family: sans-serif;
-				padding: 20px;
+				padding: 20px 20px 30px;
 				text-align: center;
 				background-color: #abdfe0;
 				margin-bottom: 20px;
 			}
 
 			.big {
-				font-size: 60px;
+				font-size: 45px;
 				font-weight: bold;
-				margin: 0 0 20px;
+				margin: 10px 0;
+			}
+
+			p {
+				font-weight: 600;
+			}
+
+			img {
+				width: 200px;
+				transform: translateX(13px);
 			}
 		`;
 	}
@@ -37,8 +46,9 @@ class Component extends LitElement {
 	render() {
 		return html`
 			<p>${this.greeting}</p>
+			<img src=${this.imgSrc} alt="">
 			<p class="big">${this.counter}</p>
-			<wired-button @click=${this._onButtonClick}>Click me!</wired-button>
+			<wired-button elevation="3" @click=${this._onButtonClick}>Click me!</wired-button>
 		`;
 	}
 
