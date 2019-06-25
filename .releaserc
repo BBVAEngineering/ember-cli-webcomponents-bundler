@@ -1,10 +1,20 @@
 {
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        "@semantic-release/changelog",
-        "@semantic-release/npm",
-        "@semantic-release/git",
-        "@semantic-release/github"
+  "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+  ],
+  "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+  ],
+  "plugins": [
+    [
+      "@semantic-release/exec", {
+        "publishCmd": "npx ember deploy production --verbose"
+      }
     ]
+  ]
 }
