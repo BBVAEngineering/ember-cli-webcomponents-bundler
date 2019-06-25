@@ -1,5 +1,17 @@
 # ember-cli-webcomponents-bundler
 
+[![Build Status](https://travis-ci.org/BBVAEngineering/ember-cli-webcomponents-bundler.svg?branch=master)](https://travis-ci.org/BBVAEngineering/ember-cli-webcomponents-bundler)
+[![GitHub version](https://badge.fury.io/gh/BBVAEngineering%2Fember-cli-webcomponents-bundler.svg)](https://badge.fury.io/gh/BBVAEngineering%2Fember-cli-webcomponents-bundler)
+[![NPM version](https://badge.fury.io/js/ember-cli-webcomponents-bundler.svg)](https://badge.fury.io/js/ember-cli-webcomponents-bundler)
+[![Dependency Status](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler)
+[![codecov](https://codecov.io/gh/BBVAEngineering/ember-cli-webcomponents-bundler/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/ember-cli-webcomponents-bundler)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://greenkeeper.io/)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-webcomponents-bundler.svg)](https://emberobserver.com/addons/ember-cli-webcomponents-bundler)
+
+## Information
+
+[![NPM](https://nodei.co/npm/ember-cli-webcomponents-bundler.png?downloads=true&downloadRank=true)](https://nodei.co/npm/ember-cli-webcomponents-bundler/)
+
 Allows to use Web Components using ES6 modules in an Ember application.
 
 ## Installation
@@ -24,7 +36,7 @@ The addon options can be configured in `config/environment.js`.
 }
 ```
 
-Inside of each entrypointPath should exist a file with the required imports named `module-imports.js` by default. The file name can be configured in `entrypointFileName` option.
+A file named `module-imports.js` (default value) should exist inside each entrypointPath with the imports to be bundled. The file name can be configured in `entrypointFileName` option.
 
 **Example entrypoint:**
 
@@ -36,7 +48,7 @@ import 'components/another-component/another-component';
 
 **Output**
 
-A bundled file will be generated for each of the `entrypointPaths` in the same directory of the entrypoint path. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
+A bundled file will be generated for each of the `entrypointPaths` in the a directory with the name of the entrypointPath. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
 
 The name of the bundle and the `outputPath` can be configured setting `outputFileName` and `outputPath` respectively.
 
@@ -47,15 +59,14 @@ The name of the bundle and the `outputPath` can be configured setting `outputFil
 type: `String`   
 default: `module-imports.js`
 
-Name of the file used as entry point for ES modules inside each `entrypointPath`.
-
+Name of the file used as entry point for ES modules inside each entrypointPath.
 
 ### `outputFileName`
 
 type: `String`   
 default: `bundle.js`
 
-Name of the generated bundle for each entypoint path.
+Name of the generated bundle for each entypointPath.
 
 ### `outputPath`
 
@@ -69,7 +80,7 @@ Path where the generated bundle will be saved in the dist folder.
 type: `Boolean`   
 default: `false` (`true` in production env)
 
-Wheter to minify the bundle. If not set, the bundle is minified in production environment.
+Whether to minify the bundle. If not set, the bundle is minified in production environment.
 
 ### `modules`
 
