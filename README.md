@@ -48,7 +48,7 @@ import 'components/another-component/another-component';
 
 **Output**
 
-A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entrypointPath. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
+A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entrypointPath. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
 
 Both, the bundle name and the output path can be configured by setting them as `outputFileName` and `outputPath` respectively.
 
