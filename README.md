@@ -36,19 +36,19 @@ The addon options can be configured in `config/environment.js`.
 }
 ```
 
-A file named `module-imports.js` (default value) should exist inside each entrypointPath with the imports to be bundled. The file name can be configured in `entrypointFileName` option.
+A file named `module-imports.js` (default value) should exist inside each entry point path with the imports to be bundled. The file name can be configured in `entrypointFileName` option.
 
 **Example entrypoint:**
 
 ```js
 // file: lib/path-one/module-imports.js
-import 'components/some-component/some-component';
-import 'components/another-component/another-component';
+import './components/some-component/some-component';
+import './components/another-component/another-component';
 ```
 
 **Output**
 
-A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entrypointPath. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
+A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entry point path. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
 
 Both, the bundle name and the output path can be configured by setting them as `outputFileName` and `outputPath` respectively.
 
