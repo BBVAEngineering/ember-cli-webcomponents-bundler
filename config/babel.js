@@ -2,10 +2,16 @@
 
 'use strict';
 
+const common = {
+	babelrc: false,
+	plugins: [
+		'@babel/plugin-syntax-import-meta'
+	]
+};
+
 module.exports = function(targets) {
 	return {
-		modules: {
-			babelrc: false,
+		modules: Object.assign({}, common, {
 			presets: [
 				[
 					'@babel/env',
@@ -15,13 +21,9 @@ module.exports = function(targets) {
 						}
 					}
 				]
-			],
-			plugins: [
-				'@babel/plugin-syntax-import-meta'
 			]
-		},
-		legacy: {
-			babelrc: false,
+		}),
+		legacy: Object.assign({}, common, {
 			presets: [
 				[
 					'@babel/env',
@@ -30,10 +32,7 @@ module.exports = function(targets) {
 						targets
 					}
 				]
-			],
-			plugins: [
-				'@babel/plugin-syntax-import-meta'
 			]
-		}
+		})
 	};
 };
