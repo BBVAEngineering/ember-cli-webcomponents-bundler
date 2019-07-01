@@ -101,7 +101,7 @@ module.exports = {
 			return tree;
 		}
 
-		const rollupFunnels = this.options.entrypointPaths.map((dirname) => {
+		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
 			const basename = path.basename(dirname, this.options.entrypointFileName); // last part of the path
 			const getOutputFileName = (config) => this._getOutputFilePath(basename, true, config.name === 'modules');
@@ -120,7 +120,7 @@ module.exports = {
 			return mergeTrees(bundles);
 		});
 
-		return mergeTrees(rollupFunnels.concat(tree), {
+		return mergeTrees(rollupTrees.concat(tree), {
 			overwrite: true
 		});
 	}
