@@ -31,7 +31,7 @@
     "merge-coverage": "cp coverage/ember/coverage-final.json coverage/ember.json && cp coverage/node/coverage-final.json coverage/node.json && nyc merge coverage coverage/coverage-final.json",
     "check-coverage": "istanbul check-coverage coverage/coverage-final.json --statements 100 --functions 100 --branches 100 --lines 100",
     "commit": "git-cz",
-    "posttest": "npm run merge-coverage && npm run report-coverage && npm run check-coverage",
+    "posttest": "npm run clean-coverage && npm run merge-coverage && npm run report-coverage && npm run check-coverage",
     "report-coverage": "istanbul report --include=coverage/coverage-final.json text",
     "semantic-release": "semantic-release",
     "validate-coverage": "test \"$(cat coverage/coverage-summary.json | json total.lines.total)\" -gt 0"
