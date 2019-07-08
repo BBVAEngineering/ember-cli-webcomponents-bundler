@@ -16,9 +16,7 @@
   },
   "files": [
     "index.js",
-    "config/babel.js",
-    "config/output.js",
-    "config/rollup.js",
+    "lib/**",
     "utils/**"
   ],
   "scripts": {

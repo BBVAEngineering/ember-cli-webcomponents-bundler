@@ -2,9 +2,7 @@
   "check-coverage": true,
   "include": [
     "index.js",
-    "config/babel.js",
-    "config/output.js",
-    "config/rollup.js"
+    "lib/**"
   ],
   "reporter": [
     "lcov",

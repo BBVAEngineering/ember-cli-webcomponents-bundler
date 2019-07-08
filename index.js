@@ -5,8 +5,8 @@
 
 const mergeTrees = require('broccoli-merge-trees');
 const Rollup = require('broccoli-rollup');
-const rollupConfig = require('./config/rollup');
-const outputConfig = require('./config/output');
+const rollupConfig = require('./lib/config/rollup');
+const outputConfig = require('./lib/config/output');
 const path = require('path');
 
 module.exports = {
