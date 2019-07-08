@@ -1,4 +1,3 @@
-/* eslint-disable no-sync */
 'use strict';
 
 const fs = require('fs-extra');
@@ -31,14 +30,14 @@ function runEmberCommand(packagePath, command) {
 	);
 }
 
-function mockConfig(mockFile) {
-	fs.renameSync(path.resolve(fixtureConfigPath, 'environment.js'), path.resolve(fixtureConfigPath, 'environment-BACKUP.js'));
-	fs.renameSync(mockFile, path.resolve(fixtureConfigPath, 'environment.js'));
+async function mockConfig(mockFile) {
+	await fs.rename(path.resolve(fixtureConfigPath, 'environment.js'), path.resolve(fixtureConfigPath, 'environment-BACKUP.js'));
+	await fs.rename(mockFile, path.resolve(fixtureConfigPath, 'environment.js'));
 }
 
-function restoreConfig(mockFile) {
-	fs.renameSync(path.resolve(fixtureConfigPath, 'environment.js'), mockFile);
-	fs.renameSync(path.resolve(fixtureConfigPath, 'environment-BACKUP.js'), path.resolve(fixtureConfigPath, 'environment.js'));
+async function restoreConfig(mockFile) {
+	await fs.rename(path.resolve(fixtureConfigPath, 'environment.js'), mockFile);
+	await fs.rename(path.resolve(fixtureConfigPath, 'environment-BACKUP.js'), path.resolve(fixtureConfigPath, 'environment.js'));
 }
 
 function outputFilePath(file) {
@@ -56,9 +55,9 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
-		after(() => {
+		after(async() => {
 			restoreConfig(mockConfigFile);
-			fs.removeSync(distPath);
+			await fs.remove(distPath);
 		});
 
 		it('generates one bundle for each entrypointPath', () => {
@@ -80,9 +79,9 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
-		after(() => {
+		after(async() => {
 			restoreConfig(mockConfigFile);
-			fs.removeSync(distPath);
+			await fs.remove(distPath);
 		});
 
 		it('generates two bundles for each entrypointPath: one as module and one with the build config for the app targets', () => {
@@ -104,9 +103,9 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
-		after(() => {
+		after(async() => {
 			restoreConfig(mockConfigFile);
-			fs.removeSync(distPath);
+			await fs.remove(distPath);
 		});
 
 		it('does not insert a script tag for the bundle in index', () => {
