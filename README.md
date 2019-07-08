@@ -101,7 +101,9 @@ List of paths where the addon will search for an entry point to generate its cor
 type: `Boolean`   
 default: `true` 
 
-Writes the script tags for the bundle(s) in index.html. You can disable this option if you want to import the scripts on demand. When this option is set to `false`, [webcomponents.js polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs) is not included in `vendor.js`, so you must import it explicitly before the bundle.
+Writes the script tags for the bundle(s) in index.html. You can disable this option if you want to import the scripts on demand. 
+
+When this option is set to `false`, [webcomponents.js polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs) is not included in `vendor.js`, so you must import it explicitly before the bundle.
 
 ## Contribute
 
