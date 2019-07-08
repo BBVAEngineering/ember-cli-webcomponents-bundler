@@ -64,7 +64,7 @@ module.exports = {
 
 	_importPolyfills() {
 		this.app.import('node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js', { options: 'prepend' });
-		this.app.import(path.join(__dirname, 'utils/webcomponents-utils.js'));
+		this.app.import(path.join(__dirname, 'vendor/webcomponents-utils.js'));
 	},
 
 	contentFor(type) {
