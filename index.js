@@ -1,5 +1,4 @@
 /* eslint-disable consistent-return */
-/* eslint-env node */
 
 'use strict';
 
@@ -35,6 +34,10 @@ module.exports = {
 		this.options.rootURL = url;
 
 		this._setOutputOptions();
+
+		if (this.options.autoImport) {
+			this._importPolyfills();
+		}
 	},
 
 	_setOutputOptions() {
@@ -51,6 +54,11 @@ module.exports = {
 		}
 	},
 
+	_importPolyfills() {
+		this.app.import('node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js', { options: 'prepend' });
+		this.app.import(path.join(__dirname, 'vendor/webcomponents-utils.js'));
+	},
+
 	afterInstall() {
 		return this.addPackageToProject('@webcomponents/webcomponentsjs', '2.2.10');
 	},
@@ -58,13 +66,6 @@ module.exports = {
 	included(app, parentAddon) {
 		this._super.included.apply(this, arguments);
 		this.app = parentAddon || app;
-
-		this._importPolyfills();
-	},
-
-	_importPolyfills() {
-		this.app.import('node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js', { options: 'prepend' });
-		this.app.import(path.join(__dirname, 'vendor/webcomponents-utils.js'));
 	},
 
 	contentFor(type) {

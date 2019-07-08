@@ -115,5 +115,11 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 		it('does not insert a script tag for the bundle in index', () => {
 			assert.noFileContent(indexPath, '<script src="/assets/web-components/bundle.js"');
 		});
+
+		it('does not include webcomponentsjs polyfill in vendor.js', () => {
+			const vendorPath = outputFilePath('assets/vendor.js');
+
+			assert.noFileContent(vendorPath, 'window.customElements.forcePolyfill');
+		});
 	});
 });
