@@ -8,15 +8,15 @@ const assert = require('yeoman-assert');
 
 const TEST_TIMEOUT = 50000;
 const MOCK_ENV_CONFIGS = {
-	default: path.resolve(__dirname, './mocks/environment-default.js'),
-	modules: path.resolve(__dirname, './mocks/environment-modules.js'),
-	noAutoImport: path.resolve(__dirname, './mocks/environment-no-autoimport.js')
+	default: path.resolve(__dirname, '../mocks/environment-default.js'),
+	modules: path.resolve(__dirname, '../mocks/environment-modules.js'),
+	noAutoImport: path.resolve(__dirname, '../mocks/environment-no-autoimport.js')
 };
 
-const emberCLIPath = path.resolve(__dirname, '../node_modules/ember-cli/bin/ember');
-const fixturePath = path.resolve(__dirname, '../');
-const fixtureConfigPath = path.resolve(__dirname, '../tests/dummy/config');
-const distPath = path.resolve(__dirname, '../dist');
+const emberCLIPath = path.resolve(__dirname, '../../node_modules/ember-cli/bin/ember');
+const fixturePath = path.resolve(__dirname, '../..');
+const fixtureConfigPath = path.resolve(__dirname, '../../tests/dummy/config');
+const distPath = path.resolve(__dirname, '../../dist');
 
 function runEmberCommand(packagePath, command) {
 	return new Promise((resolve, reject) =>
