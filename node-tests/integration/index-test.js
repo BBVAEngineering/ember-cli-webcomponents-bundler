@@ -15,6 +15,8 @@ const MOCK_ENV_CONFIGS = {
 const emberCLIPath = path.resolve(__dirname, '../../node_modules/ember-cli/bin/ember');
 const fixturePath = path.resolve(__dirname, '../..');
 const fixtureConfigPath = path.resolve(__dirname, '../../tests/dummy/config');
+const envPath = path.resolve(fixtureConfigPath, 'environment.js');
+const mockEnvPath = path.resolve(fixtureConfigPath, 'environment-BACKUP.js');
 const distPath = path.resolve(__dirname, '../../dist');
 
 function runEmberCommand(packagePath, command) {
@@ -31,13 +33,13 @@ function runEmberCommand(packagePath, command) {
 }
 
 async function mockConfig(mockFile) {
-	await fs.rename(path.resolve(fixtureConfigPath, 'environment.js'), path.resolve(fixtureConfigPath, 'environment-BACKUP.js'));
-	await fs.rename(mockFile, path.resolve(fixtureConfigPath, 'environment.js'));
+	await fs.rename(envPath, mockEnvPath);
+	await fs.rename(mockFile, envPath);
 }
 
 async function restoreConfig(mockFile) {
-	await fs.rename(path.resolve(fixtureConfigPath, 'environment.js'), mockFile);
-	await fs.rename(path.resolve(fixtureConfigPath, 'environment-BACKUP.js'), path.resolve(fixtureConfigPath, 'environment.js'));
+	await fs.rename(envPath, mockFile);
+	await fs.rename(mockEnvPath, envPath);
 }
 
 function outputFilePath(file) {
@@ -46,6 +48,8 @@ function outputFilePath(file) {
 
 describe('ember-cli-webcomponents-bundler | options', function() {
 	this.timeout(TEST_TIMEOUT);
+
+	const indexPath = outputFilePath('index.html');
 
 	context('using defaults', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.default;
@@ -66,8 +70,8 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 		});
 
 		it('inserts the script tag for the bundle in index', () => {
-			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
-			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/dummy-path/bundle.js"');
+			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle.js"');
+			assert.fileContent(indexPath, '<script src="/assets/dummy-path/bundle.js"');
 		});
 	});
 
@@ -90,8 +94,8 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 		});
 
 		it('inserts two script tags for the bundles in index', () => {
-			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle-esm.js" type="module"');
-			assert.fileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js" defer nomodule');
+			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle-esm.js" type="module"');
+			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle.js" defer nomodule');
 		});
 	});
 
@@ -109,7 +113,7 @@ describe('ember-cli-webcomponents-bundler | options', function() {
 		});
 
 		it('does not insert a script tag for the bundle in index', () => {
-			assert.noFileContent(outputFilePath('index.html'), '<script src="/assets/web-components/bundle.js"');
+			assert.noFileContent(indexPath, '<script src="/assets/web-components/bundle.js"');
 		});
 	});
 });
