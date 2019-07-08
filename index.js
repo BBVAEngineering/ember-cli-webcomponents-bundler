@@ -51,7 +51,6 @@ module.exports = {
 		}
 	},
 
-	/* istanbul ignore next */
 	afterInstall() {
 		return this.addPackageToProject('@webcomponents/webcomponentsjs', '2.2.10');
 	},

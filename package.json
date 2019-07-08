@@ -103,6 +103,7 @@
     "nyc": "^13.1.0",
     "qunit-dom": "^0.9.0",
     "semantic-release": "^15.13.16",
+    "sinon": "^7.3.2",
     "wired-button": "^1.0.0",
     "yeoman-assert": "^3.1.1"
   },
