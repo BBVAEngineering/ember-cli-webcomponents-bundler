@@ -1,11 +1,11 @@
 (function() {
-	var _customElementsDefine = window.customElements.define;
+	var customElementsDefine = window.customElements.define;
 
 	window.customElements.define = function(name, cl, conf) {
 		if (!customElements.get(name)) {
-			_customElementsDefine.call(window.customElements, name, cl, conf);
+			customElementsDefine.call(window.customElements, name, cl, conf);
 		} else {
-			console.warn(''.concat(name, ' has been defined twice'));
+			console.warn(name + ' has been defined twice');
 		}
 	};
 
