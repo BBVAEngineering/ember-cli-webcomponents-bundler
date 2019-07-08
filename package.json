@@ -16,8 +16,7 @@
   },
   "files": [
     "index.js",
-    "lib/**",
-    "utils/**"
+    "lib/**"
   ],
   "scripts": {
     "build": "ember build",
