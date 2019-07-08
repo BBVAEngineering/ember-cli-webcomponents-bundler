@@ -46,7 +46,7 @@ function outputFilePath(file) {
 	return path.join(distPath, file);
 }
 
-describe('ember-cli-webcomponents-bundler | options', function() {
+describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	this.timeout(TEST_TIMEOUT);
 
 	const indexPath = outputFilePath('index.html');
