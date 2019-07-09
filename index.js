@@ -35,9 +35,13 @@ module.exports = {
 
 		this._setOutputOptions();
 
-		if (this.options.autoImport) {
+		if (this._shouldImportPolyfill()) {
 			this._importPolyfills();
 		}
+	},
+
+	_shouldImportPolyfill() {
+		return this.options.autoImport && this.options.entrypointPaths.length;
 	},
 
 	_setOutputOptions() {

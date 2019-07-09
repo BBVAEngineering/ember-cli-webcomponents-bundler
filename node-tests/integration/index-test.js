@@ -9,7 +9,8 @@ const TEST_TIMEOUT = 50000;
 const MOCK_ENV_CONFIGS = {
 	default: path.resolve(__dirname, '../mocks/environment-default.js'),
 	modules: path.resolve(__dirname, '../mocks/environment-modules.js'),
-	noAutoImport: path.resolve(__dirname, '../mocks/environment-no-autoimport.js')
+	noAutoImport: path.resolve(__dirname, '../mocks/environment-no-autoimport.js'),
+	noEntrypointPaths: path.resolve(__dirname, '../mocks/environment-no-entrypoints.js')
 };
 
 const emberCLIPath = path.resolve(__dirname, '../../node_modules/ember-cli/bin/ember');
@@ -114,6 +115,26 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 
 		it('does not insert a script tag for the bundle in index', () => {
 			assert.noFileContent(indexPath, '<script src="/assets/web-components/bundle.js"');
+		});
+
+		it('does not include webcomponentsjs polyfill in vendor.js', () => {
+			const vendorPath = outputFilePath('assets/vendor.js');
+
+			assert.noFileContent(vendorPath, 'window.customElements.forcePolyfill');
+		});
+	});
+
+	context('without entrypointPaths', () => {
+		const mockConfigFile = MOCK_ENV_CONFIGS.noEntrypointPaths;
+
+		before(() => {
+			mockConfig(mockConfigFile);
+			return runEmberCommand(fixturePath, 'build --prod');
+		});
+
+		after(async() => {
+			restoreConfig(mockConfigFile);
+			await fs.remove(distPath);
 		});
 
 		it('does not include webcomponentsjs polyfill in vendor.js', () => {
