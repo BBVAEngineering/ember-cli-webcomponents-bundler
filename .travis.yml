@@ -60,6 +60,14 @@ jobs:
         script:
           - npx semantic-release
 
+    - stage: "Deploy"
+        deploy:
+          provider: pages
+          skip_cleanup: true
+          github-token: $GITHUB_TOKEN
+          local-dir: dist
+          verbose: true
+
 before_install:
   - npm config set spin false
   - npm install -g npm@6
@@ -75,5 +83,7 @@ stages:
   - "Tests"
   - "Regression Tests"
   - name: "Release"
+    if: branch = master
+  - name: "Deploy"
     if: branch = master
 

@@ -9,12 +9,5 @@
       "@semantic-release/npm",
       "@semantic-release/git",
       "@semantic-release/github"
-  ],
-  "plugins": [
-    [
-      "@semantic-release/exec", {
-        "publishCmd": "npx ember deploy production --verbose"
-      }
-    ]
   ]
 }
