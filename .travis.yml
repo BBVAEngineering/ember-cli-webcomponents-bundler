@@ -61,13 +61,13 @@ jobs:
           - npx semantic-release
 
     - stage: "Deploy"
-        script: npm run build -- -prod
-        deploy:
-          provider: pages
-          skip_cleanup: true
-          github-token: $GH_TOKEN
-          local-dir: dist
-          verbose: true
+      script: npm run build -- -prod
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github-token: $GH_TOKEN
+        local-dir: dist
+        verbose: true
 
 before_install:
   - npm config set spin false
