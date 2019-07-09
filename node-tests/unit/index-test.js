@@ -4,6 +4,13 @@ const addon = require('../../index');
 const assert = require('assert');
 const sinon = require('sinon');
 
+const appFixture = {
+	import() {},
+	project: {
+		targets: []
+	}
+};
+
 const baseConfig = {
 	'ember-cli-webcomponents-bundler': {}
 };
@@ -23,12 +30,7 @@ describe('ember-cli-webcomponents-bundler | Unit | Installation', () => {
 
 describe('ember-cli-webcomponents-bundler | Unit | Config', () => {
 	before(() => {
-		sinon.stub(addon, '_setOutputOptions');
-		sinon.stub(addon, '_importPolyfills');
-	});
-
-	after(() => {
-		sinon.restore();
+		addon.app = appFixture;
 	});
 
 	it('Sets its options if the addon is not configured in environment.js', () => {
