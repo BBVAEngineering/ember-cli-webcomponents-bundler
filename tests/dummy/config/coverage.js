@@ -7,7 +7,7 @@ module.exports = {
 		'json-summary',
 		'lcov'
 	],
-	coverageFolder: 'coverage',
+	coverageFolder: 'coverage/ember',
 	excludes: [
 		'tests/dummy/**/*'
 	]

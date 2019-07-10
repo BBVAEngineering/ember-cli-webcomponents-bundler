@@ -1,0 +1,14 @@
+{
+  "check-coverage": true,
+  "include": [
+    "index.js",
+    "lib/**"
+  ],
+  "reporter": [
+    "lcov",
+    "json",
+    "json-summary",
+    "text"
+  ],
+  "report-dir": "coverage/node"
+}

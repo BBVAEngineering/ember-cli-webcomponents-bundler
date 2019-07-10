@@ -27,7 +27,8 @@ module.exports = {
 			'testem.js',
 			'blueprints/*/index.js',
 			'config/**/*.js',
-			'tests/dummy/config/**/*.js'
+			'tests/dummy/config/**/*.js',
+			'node-tests/**/*.js'
 		],
 		excludedFiles: [
 			'addon/**',
@@ -37,11 +38,12 @@ module.exports = {
 		],
 		parserOptions: {
 			sourceType: 'script',
-			ecmaVersion: 2015
+			ecmaVersion: 2017
 		},
 		env: {
 			browser: false,
-			node: true
+			node: true,
+			mocha: true
 		},
 		plugins: ['node'],
 		rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
