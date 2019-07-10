@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-webcomponents-bundler",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "description": "Allows to use Web Components using ES modules in your Ember app",
   "keywords": [
     "ember-addon",
