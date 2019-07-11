@@ -5,6 +5,7 @@
 [![NPM version](https://badge.fury.io/js/ember-cli-webcomponents-bundler.svg)](https://badge.fury.io/js/ember-cli-webcomponents-bundler)
 [![Dependency Status](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler)
 [![codecov](https://codecov.io/gh/BBVAEngineering/ember-cli-webcomponents-bundler/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/ember-cli-webcomponents-bundler)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://greenkeeper.io/)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-webcomponents-bundler.svg)](https://emberobserver.com/addons/ember-cli-webcomponents-bundler)
 
 ## Information
