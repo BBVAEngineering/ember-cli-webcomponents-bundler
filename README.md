@@ -105,6 +105,21 @@ Writes the script tags for the bundle(s) in index.html. You can disable this opt
 
 When this option is set to `false`, [webcomponents.js polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs) is not included in `vendor.js`, so you must import it explicitly before the bundle.
 
+### `processStyles`
+
+type: `Boolean`   
+default: `false`
+
+Allows to import css files in components. 
+
+Example:
+
+```js
+import styles from './some-component.css';
+```
+
+The imported files exports the styles in a template literal that can be interpolated in the component's template. The processed styles are transformed with Autoprefixer using the hosting app targets configured in `config/targets.js`.
+
 ## Contribute
 
 If you want to contribute to this addon, please read the [CONTRIBUTING.md](CONTRIBUTING.md).
