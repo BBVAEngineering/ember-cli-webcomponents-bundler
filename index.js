@@ -29,7 +29,8 @@ module.exports = {
 			minify: isProductionEnv,
 			modules: false,
 			entrypointPaths: [],
-			autoImport: true
+			autoImport: true,
+			processStyles: false
 		};
 
 		this.options = Object.assign(defaults, options);
@@ -101,26 +102,30 @@ module.exports = {
 		return `${root}${this.options.outputPath}/${dirname}/${filename}${ext}`;
 	},
 
+	_getTreeForProcessedStyles(inputNode) {
+		const { browsers } = this.app.project.targets;
+		const styles = Funnel(inputNode, { include: ['**/*.css'] });
+		const scripts = Funnel(inputNode, { exclude: ['**/*.css'] });
+
+		const processedStyles = new BroccoliStyleProcessor(styles, {
+			autoprefixer: {
+				enabled: true,
+				overrideBrowserslist: browsers
+			}
+		});
+
+		return mergeTrees([processedStyles].concat(scripts));
+	},
+
 	postprocessTree(type, tree) {
 		if (type !== 'all') {
 			return tree;
 		}
 
-		const { browsers } = this.app.project.targets || {};
-
+		const { processStyles } = this.options;
 		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
-			const styles = Funnel(dirname, { include: ['**/*.css'] });
-			const scripts = Funnel(dirname, { exclude: ['**/*.css'] });
-
-			const processedStyles = new BroccoliStyleProcessor(styles, {
-				autoprefixer: {
-					enabled: true,
-					overrideBrowserslist: browsers
-				}
-			});
-			const rollupInput = mergeTrees([processedStyles].concat(scripts));
-
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
+			const rollupInput = processStyles ? this._getTreeForProcessedStyles(dirname) : absEntrypointPath;
 			const basename = path.basename(dirname, this.options.entrypointFileName); // last part of the path
 			const getOutputFileName = (config) => this._getOutputFilePath(basename, true, config.name === 'modules');
 
