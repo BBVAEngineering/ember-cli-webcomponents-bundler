@@ -7,7 +7,7 @@ const Rollup = require('broccoli-rollup');
 const Funnel = require('broccoli-funnel');
 const rollupConfig = require('./lib/config/rollup');
 const outputConfig = require('./lib/config/output');
-const BroccoliLitStyles = require('./lib/broccoli-lit-styles');
+const BroccoliStyleProcessor = require('./lib/broccoli-style-processor');
 const path = require('path');
 
 module.exports = {
@@ -110,7 +110,7 @@ module.exports = {
 			const styles = Funnel(dirname, { include: ['**/*.css'] });
 			const scripts = Funnel(dirname, { exclude: ['**/*.css'] });
 
-			const processedStyles = new BroccoliLitStyles(styles);
+			const processedStyles = new BroccoliStyleProcessor(styles);
 			const rollupInput = mergeTrees([processedStyles].concat(scripts));
 
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
