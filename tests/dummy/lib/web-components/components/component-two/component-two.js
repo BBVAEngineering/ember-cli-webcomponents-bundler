@@ -1,31 +1,10 @@
 import 'wired-button';
+import commonStyles from '../common-styles.css';
 
 const template = document.createElement('template');
 
 template.innerHTML = `
-<style>
-:host {
-	display: block;
-	padding: 20px 20px 30px;
-	text-align: center;
-	background-color: #abdfe0;
-	margin-bottom: 20px;
-}
-
-.big {
-	font-size: 45px;
-	font-weight: bold;
-	margin: 10px 0;
-}
-
-p {
-	font-weight: 600;
-}
-
-img {
-	width: 200px;
-}
-</style>
+<style>${commonStyles}</style>
 
 <p></p>
 <img src="" alt="">

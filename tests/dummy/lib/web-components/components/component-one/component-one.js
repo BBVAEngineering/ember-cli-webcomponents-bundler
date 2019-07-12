@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit-element';
-import styles from './component-one.css';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
+import commonStyles from '../common-styles.css';
+import style from './component-one.css';
 import 'wired-button';
 
 class Component extends LitElement {
@@ -17,19 +18,19 @@ class Component extends LitElement {
 		this.counter = 0;
 	}
 
-	static get shadyStyles() {
-		return `
-			${styles.cssText}
-		`;
+	static get styles() {
+		return [
+			css`${unsafeCSS(commonStyles)}`,
+			css`${unsafeCSS(style)}`
+		];
 	}
 
 	render() {
 		return html`
-			<style>${this.constructor.shadyStyles}</style>
 			<p>${this.greeting}</p>
 			<img src=${this.imgSrc} alt="">
 			<p class="big">${this.counter}</p>
-			<wired-button elevation="3" @click=${this._onButtonClick}>Click me!</wired-button>
+			<wired-button class="button" elevation="3" @click=${this._onButtonClick}>Click me!</wired-button>
 		`;
 	}
 
