@@ -4,8 +4,10 @@
 
 const mergeTrees = require('broccoli-merge-trees');
 const Rollup = require('broccoli-rollup');
+const Funnel = require('broccoli-funnel');
 const rollupConfig = require('./lib/config/rollup');
 const outputConfig = require('./lib/config/output');
+const BroccoliLitStyles = require('./lib/broccoli-lit-styles');
 const path = require('path');
 
 module.exports = {
@@ -105,12 +107,18 @@ module.exports = {
 		}
 
 		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
+			const styles = Funnel(dirname, { include: ['**/*.css'] });
+			const scripts = Funnel(dirname, { exclude: ['**/*.css'] });
+
+			const processedStyles = new BroccoliLitStyles(styles);
+			const rollupInput = mergeTrees([processedStyles].concat(scripts));
+
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
 			const basename = path.basename(dirname, this.options.entrypointFileName); // last part of the path
 			const getOutputFileName = (config) => this._getOutputFilePath(basename, true, config.name === 'modules');
 
 			const bundles = this._outputConfigs.map((config) => new Rollup(
-				absEntrypointPath,
+				rollupInput,
 				rollupConfig({
 					entrypoint: this.options.entrypointFileName,
 					root: absEntrypointPath,

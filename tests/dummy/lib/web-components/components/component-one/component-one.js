@@ -1,4 +1,5 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html } from 'lit-element';
+import styles from './component-one.css';
 import 'wired-button';
 
 class Component extends LitElement {
@@ -16,35 +17,15 @@ class Component extends LitElement {
 		this.counter = 0;
 	}
 
-	static get styles() {
-		return css`
-			:host {
-				display: block;
-				padding: 20px 20px 30px;
-				text-align: center;
-				background-color: #abdfe0;
-				margin-bottom: 20px;
-			}
-
-			.big {
-				font-size: 45px;
-				font-weight: bold;
-				margin: 10px 0;
-			}
-
-			p {
-				font-weight: 600;
-			}
-
-			img {
-				width: 200px;
-				transform: translateX(13px);
-			}
+	static get shadyStyles() {
+		return `
+			${styles.cssText}
 		`;
 	}
 
 	render() {
 		return html`
+			<style>${this.constructor.shadyStyles}</style>
 			<p>${this.greeting}</p>
 			<img src=${this.imgSrc} alt="">
 			<p class="big">${this.counter}</p>
