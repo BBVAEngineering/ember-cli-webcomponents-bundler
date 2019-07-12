@@ -1,7 +1,7 @@
 'use strict';
 
 const browsers = [
-	'last 1 Chrome versions',
+	'chrome >= 30',
 	'last 1 Firefox versions',
 	'last 1 Safari versions'
 ];

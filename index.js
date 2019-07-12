@@ -106,11 +106,18 @@ module.exports = {
 			return tree;
 		}
 
+		const { browsers } = this.app.project.targets || {};
+
 		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
 			const styles = Funnel(dirname, { include: ['**/*.css'] });
 			const scripts = Funnel(dirname, { exclude: ['**/*.css'] });
 
-			const processedStyles = new BroccoliStyleProcessor(styles);
+			const processedStyles = new BroccoliStyleProcessor(styles, {
+				autoprefixer: {
+					enabled: true,
+					overrideBrowserslist: browsers
+				}
+			});
 			const rollupInput = mergeTrees([processedStyles].concat(scripts));
 
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
