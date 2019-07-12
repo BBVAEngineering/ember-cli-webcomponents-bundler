@@ -105,7 +105,7 @@ module.exports = {
 	_getTreeForProcessedStyles(inputNode) {
 		const { browsers } = this.app.project.targets;
 		const styles = Funnel(inputNode, { include: ['**/*.css'] });
-		const scripts = Funnel(inputNode, { exclude: ['**/*.css'] });
+		const excludedStyles = Funnel(inputNode, { exclude: ['**/*.css'] });
 
 		const processedStyles = new BroccoliStyleProcessor(styles, {
 			autoprefixer: {
@@ -114,7 +114,7 @@ module.exports = {
 			}
 		});
 
-		return mergeTrees([processedStyles].concat(scripts));
+		return mergeTrees([processedStyles].concat(excludedStyles));
 	},
 
 	postprocessTree(type, tree) {
