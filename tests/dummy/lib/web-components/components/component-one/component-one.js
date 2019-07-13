@@ -1,7 +1,8 @@
 import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import commonStyles from '../common-styles.css';
 import style from './component-one.css';
-import 'wired-button';
+// eslint-disable-next-line no-unused-vars
+import { Button } from 'weightless';
 
 class Component extends LitElement {
 	static get properties() {
@@ -30,7 +31,7 @@ class Component extends LitElement {
 			<p>${this.greeting}</p>
 			<img src=${this.imgSrc} alt="">
 			<p class="big">${this.counter}</p>
-			<wired-button class="button" elevation="3" @click=${this._onButtonClick}>Click me!</wired-button>
+			<wl-button class="button" inverted @click=${this._onButtonClick}>Click me!</wl-button>
 		`;
 	}
 

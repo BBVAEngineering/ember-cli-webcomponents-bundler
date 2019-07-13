@@ -19,3 +19,7 @@ p {
 img {
 	width: 200px;
 }
+
+.button {
+	--button-border-radius: 4px;
+}

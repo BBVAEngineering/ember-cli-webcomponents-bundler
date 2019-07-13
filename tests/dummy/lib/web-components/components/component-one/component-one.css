@@ -1,8 +1,6 @@
-:host {
-	background-color: #edf6fd;
-	color: #124974;
-}
-
 .button {
-	background-color: #fff;
+	color: inherit;
+	background-color: #fdca2c;
+	--button-shadow-color: transparent;
+	--button-shadow-color-hover: transparent;
 }

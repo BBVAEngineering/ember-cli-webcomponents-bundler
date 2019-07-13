@@ -1,15 +1,22 @@
-import 'wired-button';
+// eslint-disable-next-line no-unused-vars
+import { Button } from 'weightless';
 import commonStyles from '../common-styles.css';
 
 const template = document.createElement('template');
 
 template.innerHTML = `
-<style>${commonStyles}</style>
+<style>
+	${commonStyles}
+
+	.button {
+		background-color: #e44d26;
+	}
+</style>
 
 <p></p>
 <img src="" alt="">
 <p class="big"></p>
-<wired-button elevation="3">Click me!</wired-button>`;
+<wl-button flat class="button">Click me!</wl-button>`;
 
 class ComponentTwo extends HTMLElement {
 	connectedCallback() {
@@ -24,7 +31,7 @@ class ComponentTwo extends HTMLElement {
 			this.$image = this.shadowRoot.querySelector('img');
 			this.$paragraph = this.shadowRoot.querySelector('p');
 			this.$bigParagraph = this.shadowRoot.querySelector('.big');
-			this.$button = this.shadowRoot.querySelector('wired-button');
+			this.$button = this.shadowRoot.querySelector('.button');
 
 			this.$image.src = this.imgSrc;
 			this.$paragraph.textContent = this.greeting;
