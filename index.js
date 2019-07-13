@@ -15,6 +15,11 @@ module.exports = {
 
 	isDevelopingAddon: () => true,
 
+	included(app, parentAddon) {
+		this._super.included.apply(this, arguments);
+		this.app = parentAddon || app;
+	},
+
 	config(env, baseConfig) {
 		const options = baseConfig[this.name] || {};
 
@@ -67,11 +72,6 @@ module.exports = {
 
 	afterInstall() {
 		return this.addPackageToProject('@webcomponents/webcomponentsjs', '2.2.10');
-	},
-
-	included(app, parentAddon) {
-		this._super.included.apply(this, arguments);
-		this.app = parentAddon || app;
 	},
 
 	contentFor(type) {
