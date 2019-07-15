@@ -105,7 +105,7 @@ Writes the script tags for the bundle(s) in index.html. You can disable this opt
 
 When this option is set to `false`, [webcomponents.js polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs) is not included in `vendor.js`, so you must import it explicitly before the bundle.
 
-### `processStyles`
+### `importStyles`
 
 type: `Boolean`   
 default: `false`

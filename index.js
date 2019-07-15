@@ -35,7 +35,7 @@ module.exports = {
 			modules: false,
 			entrypointPaths: [],
 			autoImport: true,
-			processStyles: false
+			importStyles: false
 		};
 
 		this.options = Object.assign(defaults, options);
@@ -102,9 +102,8 @@ module.exports = {
 		return `${root}${this.options.outputPath}/${dirname}/${filename}${ext}`;
 	},
 
-	_getTreeForProcessedStyles(inputNode) {
+	_getTreeWithImportedStyles(inputNode) {
 		const { browsers } = this.app.project.targets;
-
 		const styleScripts = new BroccoliStyleExport(inputNode, {
 			autoprefixer: {
 				overrideBrowserslist: browsers
@@ -119,10 +118,10 @@ module.exports = {
 			return tree;
 		}
 
-		const { processStyles } = this.options;
+		const { importStyles } = this.options;
 		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
-			const rollupInput = processStyles ? this._getTreeForProcessedStyles(dirname) : absEntrypointPath;
+			const rollupInput = importStyles ? this._getTreeWithImportedStyles(dirname) : absEntrypointPath;
 			const basename = path.basename(dirname, this.options.entrypointFileName); // last part of the path
 			const getOutputFileName = (config) => this._getOutputFilePath(basename, true, config.name === 'modules');
 
