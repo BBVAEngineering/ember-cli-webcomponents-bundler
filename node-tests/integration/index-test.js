@@ -55,8 +55,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('using defaults', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.default;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -79,8 +79,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('using modules (modules: true)', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.modules;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -103,8 +103,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('without autoImport (autoImport: false)', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.noAutoImport;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -127,8 +127,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('without entrypointPaths', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.noEntrypointPaths;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
