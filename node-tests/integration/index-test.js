@@ -90,13 +90,13 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 		});
 
 		it('generates two bundles for each entrypointPath: one as module and one with the build config for the app targets', () => {
-			assert.file(outputFilePath('assets/web-components/bundle.js'));
-			assert.file(outputFilePath('assets/web-components/bundle-esm.js'));
+			assert.file(outputFilePath('assets/dummy-path/bundle.js'));
+			assert.file(outputFilePath('assets/dummy-path/bundle-esm.js'));
 		});
 
 		it('inserts two script tags for the bundles in index', () => {
-			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle-esm.js" type="module"');
-			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle.js" defer nomodule');
+			assert.fileContent(indexPath, '<script src="/assets/dummy-path/bundle-esm.js" type="module"');
+			assert.fileContent(indexPath, '<script src="/assets/dummy-path/bundle.js" defer nomodule');
 		});
 	});
 
