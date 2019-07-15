@@ -4,10 +4,10 @@
 
 const mergeTrees = require('broccoli-merge-trees');
 const Rollup = require('broccoli-rollup');
-const Funnel = require('broccoli-funnel');
+const funnel = require('broccoli-funnel');
 const rollupConfig = require('./lib/config/rollup');
 const outputConfig = require('./lib/config/output');
-const BroccoliStyleProcessor = require('./lib/broccoli-style-processor');
+const BroccoliStyleExport = require('./lib/broccoli-style-export');
 const path = require('path');
 
 module.exports = {
@@ -104,17 +104,14 @@ module.exports = {
 
 	_getTreeForProcessedStyles(inputNode) {
 		const { browsers } = this.app.project.targets;
-		const styles = Funnel(inputNode, { include: ['**/*.css'] });
-		const excludedStyles = Funnel(inputNode, { exclude: ['**/*.css'] });
 
-		const processedStyles = new BroccoliStyleProcessor(styles, {
+		const styleScripts = new BroccoliStyleExport(inputNode, {
 			autoprefixer: {
-				enabled: true,
 				overrideBrowserslist: browsers
 			}
 		});
 
-		return mergeTrees([processedStyles].concat(excludedStyles));
+		return funnel(styleScripts, { exclude: ['**/*.css'] });
 	},
 
 	postprocessTree(type, tree) {
