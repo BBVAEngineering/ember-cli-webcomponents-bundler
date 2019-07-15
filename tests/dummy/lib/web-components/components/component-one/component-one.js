@@ -2,7 +2,7 @@ import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import commonStyles from '../common-styles.css';
 import style from './component-one.css';
 // eslint-disable-next-line no-unused-vars
-import { Button } from 'weightless';
+import { Button } from 'weightless/button';
 
 class Component extends LitElement {
 	static get properties() {

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Button } from 'weightless';
+import { Button } from 'weightless/button';
 import commonStyles from '../common-styles.css';
 
 const template = document.createElement('template');
