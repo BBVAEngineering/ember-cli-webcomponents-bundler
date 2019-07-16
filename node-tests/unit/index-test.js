@@ -1,7 +1,7 @@
 'use strict';
 
 const addon = require('../../index');
-const assert = require('assert');
+const { assert } = require('chai');
 const sinon = require('sinon');
 
 const appFixture = {
@@ -50,42 +50,25 @@ describe('ember-cli-webcomponents-bundler | Unit | Config', () => {
 	});
 
 	it('Sets default options', () => {
-		const defaults = {
-			entrypointFileName: 'module-imports.js',
-			outputFileName: 'bundle.js',
-			outputPath: 'assets',
-			minify: false,
-			modules: false,
-			entrypointPaths: [],
-			autoImport: true
-		};
-
 		addon.config('dummy-env', baseConfig);
 
-		assert.deepStrictEqual(addon.options, Object.assign({}, addon.options, defaults));
+		const expected = {
+			entrypointFileName: 'module-imports.js',
+			outputFileName: 'bundle.js',
+			entrypointPaths: []
+		};
+
+		assert.deepInclude(addon.options, expected);
 	});
 
 	it('Sets custom options from environment.js', () => {
 		const config = {
-			rootURL: 'any',
-			'ember-cli-webcomponents-bundler': {
-				entrypointFileName: 'input.js',
-				outputFileName: 'output.js',
-				outputPath: 'any',
-				minify: false,
-				modules: true,
-				entrypointPaths: ['foo', 'bar'],
-				autoImport: false
-			}
-		};
-
-		const expected = Object.assign({}, config[addon.name], {
 			rootURL: 'any'
-		});
+		};
 
 		addon.config('dummy-env', config);
 
-		assert.deepStrictEqual(addon.options, expected);
+		assert.include(addon.options, config);
 	});
 
 	it('Sets options.rootURL as an empty string if not provided in environment.js', () => {

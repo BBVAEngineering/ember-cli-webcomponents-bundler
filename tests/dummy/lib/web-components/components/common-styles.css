@@ -1,0 +1,25 @@
+:host {
+	display: block;
+	padding: 20px 20px 30px;
+	text-align: center;
+	background-color: #fff;
+	margin-bottom: 20px;
+}
+
+.big {
+	font-size: 45px;
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+p {
+	font-weight: 600;
+}
+
+img {
+	width: 200px;
+}
+
+.button {
+	--button-border-radius: 4px;
+}

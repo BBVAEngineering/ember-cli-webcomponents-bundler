@@ -55,8 +55,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('using defaults', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.default;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -79,8 +79,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('using modules (modules: true)', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.modules;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -90,21 +90,21 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 		});
 
 		it('generates two bundles for each entrypointPath: one as module and one with the build config for the app targets', () => {
-			assert.file(outputFilePath('assets/web-components/bundle.js'));
-			assert.file(outputFilePath('assets/web-components/bundle-esm.js'));
+			assert.file(outputFilePath('assets/dummy-path/bundle.js'));
+			assert.file(outputFilePath('assets/dummy-path/bundle-esm.js'));
 		});
 
 		it('inserts two script tags for the bundles in index', () => {
-			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle-esm.js" type="module"');
-			assert.fileContent(indexPath, '<script src="/assets/web-components/bundle.js" defer nomodule');
+			assert.fileContent(indexPath, '<script src="/assets/dummy-path/bundle-esm.js" type="module"');
+			assert.fileContent(indexPath, '<script src="/assets/dummy-path/bundle.js" defer nomodule');
 		});
 	});
 
 	context('without autoImport (autoImport: false)', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.noAutoImport;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -127,8 +127,8 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 	context('without entrypointPaths', () => {
 		const mockConfigFile = MOCK_ENV_CONFIGS.noEntrypointPaths;
 
-		before(() => {
-			mockConfig(mockConfigFile);
+		before(async() => {
+			await mockConfig(mockConfigFile);
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 

@@ -4,14 +4,21 @@
 
 const mergeTrees = require('broccoli-merge-trees');
 const Rollup = require('broccoli-rollup');
+const funnel = require('broccoli-funnel');
 const rollupConfig = require('./lib/config/rollup');
 const outputConfig = require('./lib/config/output');
+const BroccoliStyleExport = require('./lib/broccoli-style-export');
 const path = require('path');
 
 module.exports = {
 	name: require('./package').name,
 
 	isDevelopingAddon: () => true,
+
+	included(app, parentAddon) {
+		this._super.included.apply(this, arguments);
+		this.app = parentAddon || app;
+	},
 
 	config(env, baseConfig) {
 		const options = baseConfig[this.name] || {};
@@ -27,7 +34,8 @@ module.exports = {
 			minify: isProductionEnv,
 			modules: false,
 			entrypointPaths: [],
-			autoImport: true
+			autoImport: true,
+			importStyles: false
 		};
 
 		this.options = Object.assign(defaults, options);
@@ -66,11 +74,6 @@ module.exports = {
 		return this.addPackageToProject('@webcomponents/webcomponentsjs', '2.2.10');
 	},
 
-	included(app, parentAddon) {
-		this._super.included.apply(this, arguments);
-		this.app = parentAddon || app;
-	},
-
 	contentFor(type) {
 		if (type === 'body-footer' && this.options.autoImport) {
 			const scriptForPath = this._getScriptTag(this.options.modules);
@@ -99,18 +102,31 @@ module.exports = {
 		return `${root}${this.options.outputPath}/${dirname}/${filename}${ext}`;
 	},
 
+	_getTreeWithImportedStyles(inputNode) {
+		const { browsers } = this.app.project.targets;
+		const styleScripts = new BroccoliStyleExport(inputNode, {
+			autoprefixer: {
+				overrideBrowserslist: browsers
+			}
+		});
+
+		return funnel(styleScripts, { exclude: ['**/*.css'] });
+	},
+
 	postprocessTree(type, tree) {
 		if (type !== 'all') {
 			return tree;
 		}
 
+		const { importStyles } = this.options;
 		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
+			const rollupInput = importStyles ? this._getTreeWithImportedStyles(dirname) : absEntrypointPath;
 			const basename = path.basename(dirname, this.options.entrypointFileName); // last part of the path
 			const getOutputFileName = (config) => this._getOutputFilePath(basename, true, config.name === 'modules');
 
 			const bundles = this._outputConfigs.map((config) => new Rollup(
-				absEntrypointPath,
+				rollupInput,
 				rollupConfig({
 					entrypoint: this.options.entrypointFileName,
 					root: absEntrypointPath,

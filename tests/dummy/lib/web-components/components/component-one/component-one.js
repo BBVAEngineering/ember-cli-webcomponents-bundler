@@ -1,5 +1,8 @@
-import { LitElement, html, css } from 'lit-element';
-import 'wired-button';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
+import commonStyles from '../common-styles.css';
+import style from './component-one.css';
+// eslint-disable-next-line no-unused-vars
+import { Button } from 'weightless/button';
 
 class Component extends LitElement {
 	static get properties() {
@@ -17,30 +20,10 @@ class Component extends LitElement {
 	}
 
 	static get styles() {
-		return css`
-			:host {
-				display: block;
-				padding: 20px 20px 30px;
-				text-align: center;
-				background-color: #abdfe0;
-				margin-bottom: 20px;
-			}
-
-			.big {
-				font-size: 45px;
-				font-weight: bold;
-				margin: 10px 0;
-			}
-
-			p {
-				font-weight: 600;
-			}
-
-			img {
-				width: 200px;
-				transform: translateX(13px);
-			}
-		`;
+		return [
+			css`${unsafeCSS(commonStyles)}`,
+			css`${unsafeCSS(style)}`
+		];
 	}
 
 	render() {
@@ -48,7 +31,7 @@ class Component extends LitElement {
 			<p>${this.greeting}</p>
 			<img src=${this.imgSrc} alt="">
 			<p class="big">${this.counter}</p>
-			<wired-button elevation="3" @click=${this._onButtonClick}>Click me!</wired-button>
+			<wl-button class="button" inverted @click=${this._onButtonClick}>Click me!</wl-button>
 		`;
 	}
 
