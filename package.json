@@ -65,7 +65,7 @@
     "@semantic-release/git": "^7.0.12",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "chai": "^4.2.0",
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^2.1.0",
     "ember-ajax": "^5.0.0",
     "ember-cli": "^3.10.1",
