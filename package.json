@@ -46,7 +46,7 @@
     "broccoli-persistent-filter": "^2.3.1",
     "broccoli-rollup": "^4.1.1",
     "deep-extend": "^0.6.0",
-    "ember-cli-babel": "^7.7.3",
+    "ember-cli-babel": "^7.10.0",
     "postcss": "^7.0.17",
     "regenerator-runtime": "^0.13.2",
     "rollup": "^1.15.6",
