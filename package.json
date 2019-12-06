@@ -47,7 +47,7 @@
     "broccoli-rollup": "^4.1.1",
     "deep-extend": "^0.6.0",
     "ember-cli-babel": "^7.7.3",
-    "postcss": "^7.0.17",
+    "postcss": "^7.0.24",
     "regenerator-runtime": "^0.13.2",
     "rollup": "^1.15.6",
     "rollup-plugin-babel": "^4.3.2",
