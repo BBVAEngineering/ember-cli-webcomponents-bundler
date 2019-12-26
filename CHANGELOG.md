@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/compare/v1.1.0...v1.1.1) (2019-12-26)
+
+
+### Bug Fixes
+
+* **package:** update broccoli-merge-trees to version 4.0.0 ([cf8e22b](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/commit/cf8e22b))
+
 # [1.1.0](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/compare/v1.0.0...v1.1.0) (2019-07-16)
 
 
