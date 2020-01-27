@@ -61,7 +61,7 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@ember/optional-features": "^0.7.0",
-    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^7.0.12",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "chai": "^4.2.0",
