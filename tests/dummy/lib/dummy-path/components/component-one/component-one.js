@@ -1,4 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
+import 'non-existent'; // Bundler warns about dependency not resolved
+
+console.log(this); // Bundler does not warn about rewriting this
 
 class Component extends LitElement {
 	static get properties() {

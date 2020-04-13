@@ -28,13 +28,15 @@ module.exports = {
 			'blueprints/*/index.js',
 			'config/**/*.js',
 			'tests/dummy/config/**/*.js',
-			'node-tests/**/*.js'
+			'node-tests/**/*.js',
+			'lib/config/*.js'
 		],
 		excludedFiles: [
 			'addon/**',
 			'addon-test-support/**',
 			'app/**',
-			'tests/dummy/app/**'
+			'tests/dummy/app/**',
+			'tests/dummy/lib/**/node_modules/**'
 		],
 		parserOptions: {
 			sourceType: 'script',

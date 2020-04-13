@@ -35,7 +35,8 @@ module.exports = {
 			modules: false,
 			entrypointPaths: [],
 			autoImport: true,
-			importStyles: false
+			importStyles: false,
+			dedupe: []
 		};
 
 		this.options = Object.assign(defaults, options);
@@ -132,6 +133,7 @@ module.exports = {
 					root: absEntrypointPath,
 					minify: this.options.minify,
 					outputfile: getOutputFileName(config),
+					dedupe: this.options.dedupe,
 					config
 				})
 			));

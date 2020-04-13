@@ -10,7 +10,9 @@ const MOCK_ENV_CONFIGS = {
 	default: path.resolve(__dirname, '../mocks/environment-default.js'),
 	modules: path.resolve(__dirname, '../mocks/environment-modules.js'),
 	noAutoImport: path.resolve(__dirname, '../mocks/environment-no-autoimport.js'),
-	noEntrypointPaths: path.resolve(__dirname, '../mocks/environment-no-entrypoints.js')
+	noEntrypointPaths: path.resolve(__dirname, '../mocks/environment-no-entrypoints.js'),
+	dedupe: path.resolve(__dirname, '../mocks/environment-dedupe.js'),
+	noDedupe: path.resolve(__dirname, '../mocks/environment-no-dedupe.js')
 };
 
 const emberCLIPath = path.resolve(__dirname, '../../node_modules/ember-cli/bin/ember');
@@ -24,11 +26,11 @@ function runEmberCommand(packagePath, command) {
 	return new Promise((resolve, reject) =>
 		exec(`${emberCLIPath} ${command}`, {
 			cwd: packagePath
-		}, (err, result) => {
+		}, (err, stdout, stderr) => {
 			if (err) {
 				reject(err);
 			}
-			resolve(result);
+			resolve({ stdout, stderr });
 		})
 	);
 }
@@ -57,6 +59,7 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 
 		before(async() => {
 			await mockConfig(mockConfigFile);
+
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -81,6 +84,7 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 
 		before(async() => {
 			await mockConfig(mockConfigFile);
+
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -105,6 +109,7 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 
 		before(async() => {
 			await mockConfig(mockConfigFile);
+
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -129,6 +134,7 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 
 		before(async() => {
 			await mockConfig(mockConfigFile);
+
 			return runEmberCommand(fixturePath, 'build --prod');
 		});
 
@@ -141,6 +147,78 @@ describe('ember-cli-webcomponents-bundler | Integration | options', function() {
 			const vendorPath = outputFilePath('assets/vendor.js');
 
 			assert.noFileContent(vendorPath, 'window.customElements.forcePolyfill');
+		});
+	});
+
+	context('without dedupe (default)', () => {
+		const mockConfigFile = MOCK_ENV_CONFIGS.noDedupe;
+
+		before(async() => {
+			await mockConfig(mockConfigFile);
+
+			return runEmberCommand(fixturePath, 'build --prod');
+		});
+
+		after(async() => {
+			restoreConfig(mockConfigFile);
+			await fs.remove(distPath);
+		});
+
+		it('nested modules are not deduped', () => {
+			const bundlePath = outputFilePath('assets/dedupe/bundle.js');
+
+			assert.fileContent(bundlePath, 'nested weightless module');
+		});
+	});
+
+	context('with dedupe', () => {
+		const mockConfigFile = MOCK_ENV_CONFIGS.dedupe;
+
+		before(async() => {
+			await mockConfig(mockConfigFile);
+
+			return runEmberCommand(fixturePath, 'build --prod');
+		});
+
+		after(async() => {
+			restoreConfig(mockConfigFile);
+			await fs.remove(distPath);
+		});
+
+		it('does not include multiple instances of deduped modules', () => {
+			const bundlePath = outputFilePath('assets/dedupe/bundle.js');
+
+			assert.noFileContent(bundlePath, 'nested weightless module');
+		});
+	});
+});
+
+describe('ember-cli-webcomponents-bundler | Integration | CLI', function() {
+	this.timeout(TEST_TIMEOUT);
+
+	context('warning messages', () => {
+		const mockConfigFile = MOCK_ENV_CONFIGS.modules;
+		let output = {};
+
+		before(async() => {
+			await mockConfig(mockConfigFile);
+
+			output = await runEmberCommand(fixturePath, 'build --prod');
+
+			return output;
+		});
+
+		after(async() => {
+			restoreConfig(mockConfigFile);
+			await fs.remove(distPath);
+		});
+
+		it('does not log warnings about rewriting `this`', () => {
+			assert.equal(output.stderr.includes('`this` has been rewritten to `undefined`'), false);
+		});
+
+		it('logs another warnings', () => {
+			assert.ok(output.stderr.includes('could not be resolved'));
 		});
 	});
 });
