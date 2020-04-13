@@ -120,6 +120,25 @@ import styles from './some-component.css';
 
 The imported files exports the styles in a template literal that can be interpolated in the component's template. The processed styles are transformed with Autoprefixer using the hosting app targets configured in `config/targets.js`.
 
+### `dedupe`
+
+type: `Array`   
+default: `[]`
+
+Module names that should be resolved from the app `node_modules` instead of another packages requiring them. This prevents bundling the same module multiple times.
+
+Example:
+
+```js
+'ember-cli-webcomponents-bundler': {
+  modules: true,
+  entrypointPaths: [
+    'lib/path-one'
+  ],
+  dedupe: ['lit-element', 'moment']
+}
+```
+
 ## Contribute
 
 If you want to contribute to this addon, please read the [CONTRIBUTING.md](CONTRIBUTING.md).
