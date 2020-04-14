@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/compare/v1.1.1...v1.2.0) (2020-04-14)
+
+
+### Features
+
+* add dedupe option ([873c6c4](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/commit/873c6c4348e16346b4b58c0553cf749c094e20e3))
+
 ## [1.1.1](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/compare/v1.1.0...v1.1.1) (2019-12-26)
 
 
