@@ -125,7 +125,7 @@ The imported files exports the styles in a template literal that can be interpol
 type: `Array`   
 default: `[]`
 
-Module names that should be resolved from the app `node_modules` instead of another packages requiring them. This prevents bundling the same module multiple times.
+Module names that should be resolved from the app `node_modules` instead of another packages requiring them. Helps to prevent bundling the same package multiple times if package is imported from dependencies.
 
 Example:
 
