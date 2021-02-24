@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import commonStyles from '../common-styles.css';
-import style from './component-one.css';
+import style from './component-one.scss';
 import 'weightless/button';
 
 class Component extends LitElement {

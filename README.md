@@ -16,7 +16,7 @@ Allows to use Web Components using ES6 modules in an Ember application.
 
 ## Installation
 
-```
+```bash
 ember install ember-cli-webcomponents-bundler
 ```
 
@@ -46,9 +46,9 @@ import './components/some-component/some-component';
 import './components/another-component/another-component';
 ```
 
-**Output**
+## Output
 
-A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entry point path. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`. 
+A bundled file will be generated for each of the `entrypointPaths` in the directory with the name of the entry point path. For example, the bundle for `lib/path-one` will be saved in `dist/assets/path-one/bundle.js`.
 
 Both, the bundle name and the output path can be configured by setting them as `outputFileName` and `outputPath` respectively.
 
@@ -56,40 +56,40 @@ Both, the bundle name and the output path can be configured by setting them as `
 
 ### `entrypointFileName`
 
-type: `String`   
+type: `String`
 default: `module-imports.js`
 
 Name of the file used as entry point for ES modules inside each entry point path.
 
 ### `outputFileName`
 
-type: `String`   
+type: `String`
 default: `bundle.js`
 
 Name of the generated bundle for each entry point path.
 
 ### `outputPath`
 
-type: `String`   
+type: `String`
 default: `assets`
 
 Path where the generated bundle will be saved inside the dist folder.
 
 ### `minify`
 
-type: `Boolean`   
+type: `Boolean`
 default: `false` (`true` in production env)
 
 Minifies the bundle.
 
 ### `modules`
 
-type: `Boolean`   
-default: `false` 
+type: `Boolean`
+default: `false`
 
 Generates two bundles: one for browsers with ES6 modules support and another for the rest of browsers using the build presets of the app.targets.
 
-### `entrypointPaths` 
+### `entrypointPaths`
 
 type: `Array`  
 default: `[]`
@@ -98,19 +98,33 @@ List of paths where the addon will search for an entry point to generate its cor
 
 ### `autoImport`
 
-type: `Boolean`   
-default: `true` 
+type: `Boolean`
+default: `true`
 
-Writes the script tags for the bundle(s) in index.html. You can disable this option if you want to import the scripts on demand. 
+Writes the script tags for the bundle(s) in index.html. You can disable this option if you want to import the scripts on demand.
 
 When this option is set to `false`, [webcomponents.js polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs) is not included in `vendor.js`, so you must import it explicitly before the bundle.
 
 ### `importStyles`
 
-type: `Boolean`   
+type: `Boolean`
 default: `false`
 
-Allows to import css files in components. 
+Allows to import css and scss files in components. For sass compiler we use [node-sass](https://sass-lang.com/documentation/js-api).
+
+### `sassTemplate``
+
+type: `String`
+default: `./lib/templates/base_css_template.tmpl``
+
+Use an specific template to the scss->css->css-in-js translation. You can add imports or specific js code that you need this way without further modification.
+
+### `cssTemplate``
+
+type: `String`
+default: `./lib/templates/base_css_template.tmpl``
+
+Use an specific template to the css->css-in-js translation. You can add imports or specific js code that you need this way without further modification.
 
 Example:
 
@@ -122,7 +136,7 @@ The imported files exports the styles in a template literal that can be interpol
 
 ### `dedupe`
 
-type: `Array`   
+type: `Array`
 default: `[]`
 
 Module names that should be resolved from the app `node_modules` instead of another packages requiring them. Helps to prevent bundling the same package multiple times if package is imported from dependencies.
@@ -143,16 +157,13 @@ Example:
 
 If you want to contribute to this addon, please read the [CONTRIBUTING.md](CONTRIBUTING.md).
 
-
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/tags).
 
-
 ## Authors
 
 See the list of [contributors](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/graphs/contributors) who participated in this project.
-
 
 ## License
 

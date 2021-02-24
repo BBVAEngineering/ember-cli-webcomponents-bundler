@@ -30,7 +30,8 @@ module.exports = function(environment) {
 			importStyles: true,
 			entrypointPaths: [
 				path.join(entrypoint, 'web-components')
-			]
+			],
+			sassTemplate: 'tests/dummy/lib/web-components/templates/sass_template.tmpl'
 		}
 	};
 
