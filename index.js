@@ -9,6 +9,7 @@ const rollupConfig = require('./lib/config/rollup');
 const outputConfig = require('./lib/config/output');
 const BroccoliStyleExport = require('./lib/broccoli-style-export');
 const path = require('path');
+const extend = require('deep-extend');
 
 module.exports = {
 	name: require('./package').name,
@@ -36,10 +37,14 @@ module.exports = {
 			entrypointPaths: [],
 			autoImport: true,
 			importStyles: false,
+			styleTemplates: {
+				sass: './lib/templates/base_css_template.tmpl',
+				css: './lib/templates/base_css_template.tmpl',
+			},
 			dedupe: []
 		};
 
-		this.options = Object.assign(defaults, options);
+		this.options = extend(defaults, options);
 		this.options.rootURL = url;
 
 		this._setOutputOptions();
@@ -103,15 +108,16 @@ module.exports = {
 		return `${root}${this.options.outputPath}/${dirname}/${filename}${ext}`;
 	},
 
-	_getTreeWithImportedStyles(inputNode) {
+	_getTreeWithImportedStyles(inputNode, styleTemplates) {
 		const { browsers } = this.app.project.targets;
 		const styleScripts = new BroccoliStyleExport(inputNode, {
 			autoprefixer: {
 				overrideBrowserslist: browsers
-			}
+			},
+			styleTemplates
 		});
 
-		return funnel(styleScripts, { exclude: ['**/*.css'] });
+		return funnel(styleScripts, { exclude: ['**/*.css', '**/*.scss'] });
 	},
 
 	postprocessTree(type, tree) {
@@ -119,10 +125,10 @@ module.exports = {
 			return tree;
 		}
 
-		const { importStyles } = this.options;
+		const { importStyles, styleTemplates } = this.options;
 		const rollupTrees = this.options.entrypointPaths.map((dirname) => {
 			const absEntrypointPath = path.join(this.app.project.root, dirname);
-			const rollupInput = importStyles ? this._getTreeWithImportedStyles(dirname) : absEntrypointPath;
+			const rollupInput = importStyles ? this._getTreeWithImportedStyles(dirname, styleTemplates) : absEntrypointPath;
 			const basename = path.basename(dirname, this.options.entrypointFileName); // last part of the path
 			const getOutputFileName = (config) => this._getOutputFilePath(basename, true, config.name === 'modules');
 
