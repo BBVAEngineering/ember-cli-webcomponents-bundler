@@ -11,7 +11,6 @@ module.exports = {
 	],
 	browser_args: {
 		Chrome: [
-			process.env.TRAVIS ? '--no-sandbox' : null,
 			'--disable-gpu',
 			'--headless',
 			'--remote-debugging-port=0',

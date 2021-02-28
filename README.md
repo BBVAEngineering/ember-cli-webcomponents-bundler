@@ -1,11 +1,10 @@
 # ember-cli-webcomponents-bundler
 
-[![Build Status](https://travis-ci.com/BBVAEngineering/ember-cli-webcomponents-bundler.svg?branch=master)](https://travis-ci.com/BBVAEngineering/ember-cli-webcomponents-bundler)
+[![Build Status](https://github.com/github/docs/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/actions)
 [![GitHub version](https://badge.fury.io/gh/BBVAEngineering%2Fember-cli-webcomponents-bundler.svg)](https://badge.fury.io/gh/BBVAEngineering%2Fember-cli-webcomponents-bundler)
 [![NPM version](https://badge.fury.io/js/ember-cli-webcomponents-bundler.svg)](https://badge.fury.io/js/ember-cli-webcomponents-bundler)
 [![Dependency Status](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler)
 [![codecov](https://codecov.io/gh/BBVAEngineering/ember-cli-webcomponents-bundler/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/ember-cli-webcomponents-bundler)
-[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://greenkeeper.io/)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-webcomponents-bundler.svg)](https://emberobserver.com/addons/ember-cli-webcomponents-bundler)
 
 ## Information
