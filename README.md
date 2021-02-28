@@ -1,6 +1,6 @@
 # ember-cli-webcomponents-bundler
 
-[![Build Status](https://travis-ci.com/BBVAEngineering/ember-cli-webcomponents-bundler.svg?branch=master)](https://travis-ci.com/BBVAEngineering/ember-cli-webcomponents-bundler)
+[![Build Status](https://github.com/github/docs/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/BBVAEngineering/ember-cli-webcomponents-bundler/actions)
 [![GitHub version](https://badge.fury.io/gh/BBVAEngineering%2Fember-cli-webcomponents-bundler.svg)](https://badge.fury.io/gh/BBVAEngineering%2Fember-cli-webcomponents-bundler)
 [![NPM version](https://badge.fury.io/js/ember-cli-webcomponents-bundler.svg)](https://badge.fury.io/js/ember-cli-webcomponents-bundler)
 [![Dependency Status](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler.svg)](https://david-dm.org/BBVAEngineering/ember-cli-webcomponents-bundler)
