@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # ember-cli-webcomponents-bundler
 
 [![Build Status](https://travis-ci.com/BBVAEngineering/ember-cli-webcomponents-bundler.svg?branch=master)](https://travis-ci.com/BBVAEngineering/ember-cli-webcomponents-bundler)
